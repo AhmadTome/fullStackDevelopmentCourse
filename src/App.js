@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import "./App.css";
+import axios from "axios";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [users, setUsers] = useState({});
+
+
+    const user = <li>{users.firstName}</li>;
+
+
+    const listOfUser = async () => {
+
+        try {
+            const user = await axios.get('http://localhost:8000/users/23');
+            setUsers(user.data.user[0])
+        } catch (err) {
+
+        }
+
+
+    }
+
+
+
+    return (
+        <div className="app text-center">
+
+            <button className="btn btn-success" onClick={listOfUser}>Fetch Data</button>
+
+            {users.firstName ? user : ''}
+
+        </div>
+    );
 }
 
 export default App;
