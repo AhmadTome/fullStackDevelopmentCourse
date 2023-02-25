@@ -31,6 +31,9 @@ function App() {
 
             {users.firstName ? user : ''}
 
+
+            <p>Welcome</p>
+
         </div>
     );
 }
